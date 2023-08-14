@@ -8,19 +8,19 @@
 # Fixed Window: 
 always maintain a window(from last req time onwards) per window counters based throttling
 
-# PRO
+### PRO
 straightforward and simple to implement
 
-## cons
+### cons
 in case of bursts at window boundaries, request rate allowed could be on higher side if we check overlapping sections across two consecutive windows.
 
 # Sliding Window: 
 for current request timetamp streching back in time to see overlapp of current window to some portion of last window and check requests count threshold and decide to throttle or not.
 
-## PRO
+### PRO
 request processing rate better managed than fixed window.
 
-## Cons: 
+### Cons: 
 in case of bursts, cuts off the traffic suddenly so no smoothness in throttling.
 
 # Leaky Bucket:
