@@ -8,34 +8,37 @@
 # Fixed Window: 
 always maintain a window(from last req time onwards) per window counters based throttling
 
+# PRO
+straightforward and simple to implement
+
 ## cons
-Fixed Window: always maintain a window(from last req time onwards) per window counters based throttling
+in case of bursts at window boundaries, request rate allowed could be on higher side if we check overlapping sections across two consecutive windows.
 
 # Sliding Window: 
 for current request timetamp streching back in time to see overlapp of current window to some portion of last window and check requests count threshold and decide to throttle or not.
 
-## Cons: 
-in case of bursts, cuts off the traffic suddenly so no smoothness in throlling
+## PRO
+request processing rate better managed than fixed window.
 
-## Leaky Bucket:
+## Cons: 
+in case of bursts, cuts off the traffic suddenly so no smoothness in throttling.
+
+# Leaky Bucket:
+input request rate can vary and discarded in case of bucket overflow, but the output request processing rate remains constant.
+Bucket acts as an queue.
 ![image](https://github.com/khatwaniNikhil/RateLimiter/assets/3686308/06caa5f3-3e9b-4801-8f99-78c666f87e6d)
 
-### Conceptual analogies are listed below:
+## Conceptual analogies are listed below:
 1. Maximum Number of Requests Allowed (N): The bucket size
 2. Time Window Size (T): The time required for the entire bucket to be drained
 3. Maximum Traffic Rate (V): The rate at which the entire bucket of water leaks, which is equal to N/T
 4. Request Throttling: Indicates that the water injection rate is greater than the water leakage rate, eventually causing an overflow of water in the bucket
 
-### use case
-input request rate can vary, but the output request processing rate remains constant
+## use case
 usually used for traffic shaping in network communication.
 
-## Token Bucket:
+# Token Bucket:
 ![image](https://github.com/khatwaniNikhil/RateLimiter/assets/3686308/0490a8b0-3546-4d25-8e08-c1b1d018325c)
 
-### use case
+## use case
 allows the output rate to vary depending on the traffic burst size.
-
-
-
-
