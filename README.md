@@ -5,17 +5,16 @@
 4. https://www.figma.com/blog/an-alternative-approach-to-rate-limiting/
 
 # Approaches
-# Fixed Window: 
-always maintain a window(from last req time onwards) per window counters based throttling
+# Fixed size Window
+fixed size windows, incoming request mapped to a window and check for threshold cutoff in that window
 
 ### PRO
 straightforward and simple to implement
-
 ### cons
-in case of bursts at window boundaries, request rate allowed could be on higher side if we check overlapping sections across two consecutive windows.
+in case of bursts at window boundaries, total requests in a overlapping section across two consecutive windows could be higher than threshold
 
 # Sliding Window: 
-for current request timetamp streching back in time to see overlapp of current window to some portion of last window and check requests count threshold and decide to throttle or not.
+other than checking incoming request in the mapped current window for threshold cut off, imagine a virtual window ending at current timestamp - check for cutoff in this virtual window also.
 
 ### PRO
 request processing rate better managed than fixed window.
